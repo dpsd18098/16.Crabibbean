@@ -6,7 +6,7 @@ public class CrabMovement : MonoBehaviour
 {
     Rigidbody2D rb;
 
-    public float speed = 5; 
+    public float speed = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -43,10 +43,21 @@ public class CrabMovement : MonoBehaviour
             v.y = -4.5f;
             transform.position = v;
         }
+
+       
     }
 
     private void FixedUpdate()
     {
+        if(Mathf.Abs(Input.GetAxis("Vertical")) > 0.5f)
+        {
+            rb.rotation = 90;
+        }
+        if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.5f) 
+        {
+            rb.rotation = 0;
+        }
+
         Vector2 v = rb.velocity;
         v.x = Input.GetAxis("Horizontal") * speed;
         v.y = Input.GetAxis("Vertical") * speed;
