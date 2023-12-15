@@ -7,11 +7,16 @@ public class CrabMovement : MonoBehaviour
     Rigidbody2D rb;
 
     public float speed = 5;
+    public bool swimming = false;
+    public float swimSpeed = 1;
+
+    Animator animkey;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animkey = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -49,7 +54,9 @@ public class CrabMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(Mathf.Abs(Input.GetAxis("Vertical")) > 0.5f)
+        if (GameManager.instance.myState != GameManager.State.playing) return;
+
+        if (Mathf.Abs(Input.GetAxis("Vertical")) > 0.5f)
         {
             rb.rotation = 90;
         }
@@ -63,6 +70,22 @@ public class CrabMovement : MonoBehaviour
         v.y = Input.GetAxis("Vertical") * speed;
         rb.velocity = v;
 
+        if (swimming)
+        {
+            rb.velocity = new Vector3(Input.GetAxis("Horizontal") * swimSpeed * Time.deltaTime, Input.GetAxis("Vertical") * swimSpeed * Time.deltaTime, 0);
+        }
     }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "correct" && Input.GetKeyDown(KeyCode.Space))
+        {
+            animkey.Play("KeyAnimation");
+        }
+
+    }
+
+
+
+
 }
 

@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+
     public enum State { stopped, playing}
     public State myState;
 
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
         switch (myState) 
         {
             case State.stopped:
-                if (Input.GetButtonDown("Space"))
+                if (Input.GetButtonDown("Fire1"))
                 {
                     myState = State.playing;
                     time = 90;
@@ -39,7 +40,7 @@ public class GameManager : MonoBehaviour
 
             case State.playing:
                 time -= Time.deltaTime;
-                timeTxt.text = "Time:" + time.ToString("00.00");
+                timeTxt.text = "" + time.ToString("00.00");
                 if (time < 0)
                 {
                     myState = State.stopped;
