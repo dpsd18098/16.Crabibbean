@@ -5,14 +5,15 @@ using UnityEngine;
 public class CorrectTrigger : MonoBehaviour
 {
     Animator animkey;
-    //public Rigidbody2D rb;
-    //public GameObject trigger;
+    public GameObject correctObject;
+   
+    
 
     // Start is called before the first frame update
     void Start()
     {
         animkey = GetComponent<Animator>();
-        //rb = GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame
@@ -21,10 +22,11 @@ public class CorrectTrigger : MonoBehaviour
 
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            Instantiate(animkey);
             animkey.Play("KeyAnimation");
         }
     }

@@ -6,10 +6,17 @@ public class SeaTrigger : MonoBehaviour
 {
 
     public CrabMovement crab;
+    public GameObject swimCrab;
+    
      
     void OnTriggerEnter2D(Collider2D collision)
     {
-        crab.swimming = true; 
+        if (gameObject)
+        {
+            crab.swimming = true;
+        }
+        else
+            crab.swimming = false;
     }
 
 }

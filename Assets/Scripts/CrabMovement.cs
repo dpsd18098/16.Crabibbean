@@ -8,21 +8,23 @@ public class CrabMovement : MonoBehaviour
 
     public float speed = 5;
     public bool swimming = false;
-    public float swimSpeed = 1;
+    //  public float swimSpeed = 1;
+    public GameObject beachCrab;
+    
 
     Animator animkey;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animkey = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
+    
     private void Update()
     {
-        //transform.Translate(Input.GetAxis("Horizontal") * speed * Time.deltaTime, Input.GetAxis("Vetrical") * speed * Time.deltaTime, 0);
+       
         if (transform.position.x > 10.2f)
         {
             Vector3 v = transform.position;
@@ -70,21 +72,39 @@ public class CrabMovement : MonoBehaviour
         v.y = Input.GetAxis("Vertical") * speed;
         rb.velocity = v;
 
-        if (swimming)
-        {
-            rb.velocity = new Vector3(Input.GetAxis("Horizontal") * swimSpeed * Time.deltaTime, Input.GetAxis("Vertical") * swimSpeed * Time.deltaTime, 0);
-        }
+      //  if (swimming)
+       // {
+           
+            
+            
+            // transform.Translate(Input.GetAxis("Horizontal") * swimSpeed * Time.deltaTime, Input.GetAxis("Vetrical") * swimSpeed * Time.deltaTime, 0);
+           // rb.velocity = new Vector3(Input.GetAxis("Horizontal") * swimSpeed * Time.deltaTime, Input.GetAxis("Vertical") * swimSpeed * Time.deltaTime, 0);
+       // }
     }
+
+   
+
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "correct" && Input.GetKeyDown(KeyCode.Space))
+        if (collision.gameObject.tag == "correct")
         {
-            animkey.Play("KeyAnimation");
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                animkey.Play("KeyAnimation");
+            }
+            
         }
+
+      //  if (!swimming)
+      //  {
+      //      Instantiate(beachCrab);
+      //      swimming = true;
+      //  }
+
 
     }
 
-
+   
 
 
 }
