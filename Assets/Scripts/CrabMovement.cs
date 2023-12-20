@@ -8,17 +8,15 @@ public class CrabMovement : MonoBehaviour
 
     public float speed = 5;
     public bool swimming = false;
-    //  public float swimSpeed = 1;
+    public float swimSpeed = 1;
     public GameObject beachCrab;
     
-
-    Animator animkey;
-
+    public GameObject objectToSelect;
     
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        animkey = GetComponent<Animator>();
+        
     }
 
     
@@ -51,7 +49,14 @@ public class CrabMovement : MonoBehaviour
             transform.position = v;
         }
 
-       
+        if (Input.GetButtonDown("Select"))
+        {
+            if (objectToSelect != null)
+            {
+                GameObject.Find("Ykey1").GetComponent<Ykey>().Animate();
+            }
+        }
+
     }
 
     private void FixedUpdate()
@@ -72,28 +77,20 @@ public class CrabMovement : MonoBehaviour
         v.y = Input.GetAxis("Vertical") * speed;
         rb.velocity = v;
 
-      //  if (swimming)
-       // {
-           
-            
-            
-            // transform.Translate(Input.GetAxis("Horizontal") * swimSpeed * Time.deltaTime, Input.GetAxis("Vetrical") * swimSpeed * Time.deltaTime, 0);
+       
+
+        if (swimming)
+        {
+           transform.Translate(Input.GetAxis("Horizontal") * swimSpeed * Time.deltaTime, Input.GetAxis("Vetrical") * swimSpeed * Time.deltaTime, 0);
            // rb.velocity = new Vector3(Input.GetAxis("Horizontal") * swimSpeed * Time.deltaTime, Input.GetAxis("Vertical") * swimSpeed * Time.deltaTime, 0);
-       // }
+        }
     }
 
    
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "correct")
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                animkey.Play("KeyAnimation");
-            }
-            
-        }
+        
 
       //  if (!swimming)
       //  {
@@ -104,7 +101,17 @@ public class CrabMovement : MonoBehaviour
 
     }
 
-   
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag =="correct")
+                objectToSelect = collision.gameObject;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "correct")
+                objectToSelect = null;
+    }
 
 
 }

@@ -5,12 +5,12 @@ using UnityEngine;
 public class TurtleMove : MonoBehaviour
 {
     Animator anim;
-    // Start is called before the first frameupdate
+   
     void Start()
     {
         anim = GetComponent<Animator>();
     }
-    // Update is called once per frame
+    
     void Update()
     {
         if (transform.position.x > 10.2f)

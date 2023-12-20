@@ -13,24 +13,23 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
-
     public enum State { stopped, playing}
     public State myState;
 
-    // Start is called before the first frame update
+   
     void Start()
     {
         instance = this;
         myState = State.stopped;
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         switch (myState) 
         {
             case State.stopped:
-                if (Input.GetButtonDown("Fire1"))
+                if (Input.GetButtonDown("Fire1")) 
                 {
                     myState = State.playing;
                     time = 90;
