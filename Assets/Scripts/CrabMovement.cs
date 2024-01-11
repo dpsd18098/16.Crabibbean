@@ -12,7 +12,11 @@ public class CrabMovement : MonoBehaviour
     public GameObject beachCrab;
     
     public GameObject objectToSelect;
-    
+    //public GameObject objectToSelect2;
+    //public GameObject objectToSelect3;
+    int itemsCollected = 0;
+    int animPlayed = 0;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -49,12 +53,35 @@ public class CrabMovement : MonoBehaviour
             transform.position = v;
         }
 
-        if (Input.GetButtonDown("Select"))
+        if (animPlayed == 0 && Input.GetButtonDown("Select") && gameObject.name == "RightCoconut")
+        { 
+                if (objectToSelect != null)
+                {
+                    GameObject.Find("Ykey1").GetComponent<Ykey>().Animate();
+                }
+            
+            animPlayed++;
+        }
+        
+
+        else if (animPlayed == 1 && Input.GetButtonDown("Select") && gameObject.name == "CenterPalm")
         {
             if (objectToSelect != null)
             {
-                GameObject.Find("Ykey1").GetComponent<Ykey>().Animate();
+                GameObject.Find("Ykey2").GetComponent<Ykey2>().Animate();
             }
+
+            animPlayed++;
+        }
+
+        else if (animPlayed == 2 && Input.GetButtonDown("Select") && gameObject.name == "PinkShell")
+        {
+            if (objectToSelect != null)
+            {
+                GameObject.Find("Ykey3").GetComponent<Ykey3>().Animate();
+            }
+
+            animPlayed++;
         }
 
     }
@@ -88,8 +115,8 @@ public class CrabMovement : MonoBehaviour
 
    
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
+    //void OnCollisionEnter2D(Collision2D collision)
+    //{
         
 
       //  if (!swimming)
@@ -99,20 +126,32 @@ public class CrabMovement : MonoBehaviour
       //  }
 
 
-    }
+    //}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag =="correct")
-                objectToSelect = collision.gameObject;
+        if (collision.gameObject.tag == "correct")
+            objectToSelect = collision.gameObject;
+
+        //if (itemsCollected == 0 && collision.gameObject.name == "RightCoconut")
+        //{
+            //itemsCollected++;
+        //}
+        //else if (itemsCollected == 1 && collision.gameObject.name == "CenterPalm")
+        //{
+            //itemsCollected++;
+        //}
+        //else if (itemsCollected == 2 && collision.gameObject.name == "PinkShell")
+        //{
+            //itemsCollected++;
+        //}
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "correct")
-                objectToSelect = null;
+             objectToSelect = null;
     }
-
 
 }
 

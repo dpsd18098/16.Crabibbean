@@ -13,10 +13,11 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
-    public enum State { stopped, playing}
+    public enum State { stopped, playing, win}
     public State myState;
 
-   
+    public Animation Key3;
+    
     void Start()
     {
         instance = this;
@@ -35,7 +36,15 @@ public class GameManager : MonoBehaviour
                     time = 90;
                     messagesTxt.text = "";
                 }
-                break; 
+                break;
+
+            case State.win:
+                if (!Key3.isPlaying)
+                {
+                    myState = State.win;
+                    messagesTxt.text = "Congratulations, you are rich!";
+                }
+                break;
 
             case State.playing:
                 time -= Time.deltaTime;
@@ -43,11 +52,14 @@ public class GameManager : MonoBehaviour
                 if (time < 0)
                 {
                     myState = State.stopped;
-                    messagesTxt.text = "Game Over! Press Space to Restart";
+                    messagesTxt.text = "Game Over! Click to restart.";
                 }
                 break;
 
         }
 
     }
+
+    
+
 }
