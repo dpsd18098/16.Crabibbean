@@ -6,13 +6,11 @@ public class Ykey3 : MonoBehaviour
 {
     Animator Key3Anim;
 
-    // Start is called before the first frame update
     void Start()
     {
         Key3Anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         

@@ -10,7 +10,6 @@ public class Ykey : MonoBehaviour
         KeyAnim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
        

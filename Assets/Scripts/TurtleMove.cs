@@ -13,12 +13,9 @@ public class TurtleMove : MonoBehaviour
     
     void Update()
     {
-
         if (Input.GetButtonDown("Fire1"))
         {
             anim.Play("TurtleAnimation");
-        }
-        
-    }
-    
+        }      
+    }   
 }
