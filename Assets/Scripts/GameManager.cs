@@ -8,16 +8,15 @@ public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI timeTxt;
     public TextMeshProUGUI messagesTxt;
+    public TextMeshProUGUI messagesTxtMinusTime;
 
     float time = 180;
 
     public static GameManager instance;
 
-    public enum State { stopped, playing, win}
+    public enum State { stopped, playing}
     public State myState;
 
-    public Animation Key3;
-    
     void Start()
     {
         instance = this;
@@ -43,14 +42,6 @@ public class GameManager : MonoBehaviour
                 }
                 break;
 
-            case State.win:
-                if (!Key3.isPlaying)
-                {
-                    myState = State.win;
-                    messagesTxt.text = "Congratulations, you are rich!";
-                }
-                break;
-
             case State.playing:
                 time -= Time.deltaTime;
                 timeTxt.text = "" + time.ToString("00.00");
@@ -61,5 +52,24 @@ public class GameManager : MonoBehaviour
                 }
                 break;
         }
+    }
+    public void MinusTime()
+    {
+        time -= 3;
+        timeTxt.text = "";
+        messagesTxtMinusTime.text = "Wrong object, -3s";
+        Invoke(nameof(DestroyTxt), 2);
+    }
+
+    public void DestroyTxt()
+    {
+        messagesTxtMinusTime.text = "";
+    }
+
+    public void StopTime()
+    {
+        time = 0;
+        timeTxt.text = "" + time.ToString("00.00");
+        myState = State.stopped;
     }
 }

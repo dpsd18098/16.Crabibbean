@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ykey3 : MonoBehaviour
 {
     Animator Key3Anim;
+    
 
     void Start()
     {

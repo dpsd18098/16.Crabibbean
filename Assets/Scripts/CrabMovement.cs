@@ -1,19 +1,26 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class CrabMovement : MonoBehaviour
 {
     Rigidbody2D rb;
 
     public float speed = 5;
-    public GameObject beachCrab; 
     public GameObject objectToSelect;
     int animPlayed = 0;
 
+    public TextMeshProUGUI messagesTxtWin;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();   
     }
 
+    public void Win()
+    {
+        messagesTxtWin.text = "Congratulations, you are rich!";
+        GameManager.instance.StopTime();
+    }
     public void PlayCurrentHint()
     {
         GameObject.Find("Hint" + animPlayed).GetComponent<Animator>().enabled = true;
@@ -70,7 +77,12 @@ public class CrabMovement : MonoBehaviour
             GameObject.Find("Ykey3").GetComponent<Ykey3>().Animate();
 
             animPlayed++;
-            
+            Invoke(nameof(Win), 2);
+        }
+
+        if (Input.GetButtonDown("Select") && objectToSelect.tag == "false")
+        {
+            GameManager.instance.MinusTime();
         }
     }
 
@@ -99,6 +111,12 @@ public class CrabMovement : MonoBehaviour
         {
             objectToSelect = collision.gameObject;
             Debug.Log("trigger " + objectToSelect.name);
+        }
+
+       else if (collision.gameObject.tag == "false")
+        {
+            objectToSelect = collision.gameObject;
+            Debug.Log("trigger " + objectToSelect.tag);
         }
     }
 
