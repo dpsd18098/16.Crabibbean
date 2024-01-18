@@ -11,9 +11,14 @@ public class CrabMovement : MonoBehaviour
     int animPlayed = 0;
 
     public TextMeshProUGUI messagesTxtWin;
+
+    //public enum State { stop, puzzle, hint1, hint2 }
+    //public State keyState;
+
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();   
+        rb = GetComponent<Rigidbody2D>();
+        //keyState = State.stop;
     }
 
     public void Win()
@@ -59,7 +64,7 @@ public class CrabMovement : MonoBehaviour
             Debug.Log("select");
                 
             GameObject.Find("Ykey1").GetComponent<Ykey>().Animate();
-            
+
             animPlayed++;
             Invoke(nameof(PlayCurrentHint), 2);
         }
@@ -84,7 +89,14 @@ public class CrabMovement : MonoBehaviour
         {
             GameManager.instance.MinusTime();
         }
+
+        //if (Input.GetButtonDown("Fire1"))
+        //{
+            //GameManager.instance.Hints();
+        //}
     }
+
+ 
 
     private void FixedUpdate()
     {

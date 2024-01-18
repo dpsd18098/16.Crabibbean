@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ykey : MonoBehaviour
 {
     Animator KeyAnim;
+
     void Start()
     {
         KeyAnim = GetComponent<Animator>();
@@ -12,7 +13,6 @@ public class Ykey : MonoBehaviour
 
     void Update()
     {
-       
 
     }
 
