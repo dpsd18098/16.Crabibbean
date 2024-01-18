@@ -12,13 +12,10 @@ public class CrabMovement : MonoBehaviour
 
     public TextMeshProUGUI messagesTxtWin;
 
-    //public enum State { stop, puzzle, hint1, hint2 }
-    //public State keyState;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        //keyState = State.stop;
     }
 
     public void Win()
@@ -89,11 +86,6 @@ public class CrabMovement : MonoBehaviour
         {
             GameManager.instance.MinusTime();
         }
-
-        //if (Input.GetButtonDown("Fire1"))
-        //{
-            //GameManager.instance.Hints();
-        //}
     }
 
  

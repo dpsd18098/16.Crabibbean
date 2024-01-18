@@ -72,27 +72,4 @@ public class GameManager : MonoBehaviour
         timeTxt.text = "" + time.ToString("00.00");
         myState = State.stopped;
     }
-
-    //prospathia na pataei to ctrl gia na xanadei ton papiro, alla den paizei
-    //public void Hints()
-    //{
-        //int hint = Random.Range(1, 4);
-        //switch (hint)
-        //{
-            //case 1:
-                //GameObject.Find("Puzzle").GetComponent<Puzzle>().Animate();
-                //break;
-
-            //case 2:
-                //GameObject.Find("Hint1").GetComponent<Hint1>().Animate();
-                //break;
-
-            //case 3:
-                //GameObject.Find("Hint2").GetComponent<Hint2>().Animate();
-                //break;
-
-            //default:
-                //break;
-        //}
-    //}
 }
